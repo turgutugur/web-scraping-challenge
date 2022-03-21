@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+    <!-- adding Jumbobotron to Header -->
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars Demo</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="botton">Scrape New Data</a></p>
+        </div>
+        <!-- Mars News -->
+        <div class="row" id="mars-news">
+            <div class="col-md-12">
+                <div class="media">
+                    <div class="media body">
+                        <h2>Latest Mars News</h2>
+                        <h4 class="media-heading">{{mars.newsTitle}}</h4>
+                        <p>{{mars.newsP}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="mars-featured-image">
+            <!-- Image -->
+            <div class="col-md-8">
+                <h2>Freatured Mars Image</h2>
+                <img src="{{mars.image | default('static/images/error.png', true) }}" 
+                     class="img-responsive"
+                     alt="Responsive Image"/>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Mars Facts -->
+                <div class="row" id="mars-facts">
+                    <h4>Mars Facts</h4>
+                    {{mars.facts | safe}}
+                </div>
+            </div>
+        </div>
+        <!-- Mars Hempispheres -->
+        <div class="row" id="mars-hemispheres">
+            <div class="page-header">
+                <h2 class="text-center">Mars Hemispheres</h2>
+            </div>
+            {% for hemisphere in mars.hemispheres %}
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{hemisphere.img_url | default('static/images/error.png', true)}}" alt="...">
+                    <div class="caption">
+                        <h3>{{ hemisphere.title }}</h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+    
+</body>
+</html>
